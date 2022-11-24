@@ -11,5 +11,6 @@ public class Test {
 		WelcomeBean welcomBean = (WelcomeBean) context.getBean("welcom");
 		System.out.println(welcomBean.getMessage());
 		((AbstractApplicationContext) context).registerShutdownHook();
+		
 	}
 }
