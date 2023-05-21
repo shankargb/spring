@@ -1,8 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Wish Page</title>
+<meta charset="ISO-8859-1">
+<title>Wish JSP File</title>
 </head>
-<body>
-	<h1>Hello ${name}</h1>
+<body>Hello User,${message}
 </body>
 </html>

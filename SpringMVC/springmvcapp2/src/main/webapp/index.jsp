@@ -1,12 +1,16 @@
-<%@page language="java" contentType="text/html;charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
-<%@page isELIgnored="true"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Web Application</title>
+<meta charset="ISO-8859-1">
+<title>Index JSP Page</title>
 </head>
 <body>
-	<jsp:forward page="loginpage" />
+<h3>
+<a href="http://localhost:9797/springMVCApp2/hello">hello</a>
+<br><br>
+<a href="http://localhost:9797/springMVCApp2/welcome">welcome</a>
+</h3>
 </body>
 </html>

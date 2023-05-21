@@ -10,7 +10,8 @@ public class WishController implements Controller {
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView("wish", "name", request.getParameter("username"));
+		ModelAndView mav = new ModelAndView("wish", "message", "Welcome to Sprig Web Module");
 		return mav;
 	}
+
 }
