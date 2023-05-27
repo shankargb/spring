@@ -1,7 +1,0 @@
-server:
-  port: 2323
-spring:
-  application:
-    name: Spring-boot-app-prop-app
-welcome:
-  msg: Welcome to Spring App
