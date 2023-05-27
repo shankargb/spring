@@ -1,0 +1,8 @@
+
+server:
+ port:
+  4774
+ 
+spring:
+ application:
+    name: sb-yml-app  

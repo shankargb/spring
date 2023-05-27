@@ -1,0 +1,25 @@
+package com.sudha.tech.rest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sudha.tech.props.AppProperties;
+
+@RestController
+public class DemoRestController {
+
+	@Autowired
+	private AppProperties props;
+
+	@GetMapping("/welcome")
+	public String welcomeMsgMethod() {
+		Map<String, String> messages = props.getMessages();
+		String value = messages.get("welcomeMsg");
+		System.out.println(value);
+		return value;
+	}
+}

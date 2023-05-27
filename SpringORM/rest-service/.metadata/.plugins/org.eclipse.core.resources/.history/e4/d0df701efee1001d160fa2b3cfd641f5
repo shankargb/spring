@@ -1,0 +1,5 @@
+package com.sudha.tech.rest;
+
+public class DemoRestController {
+
+}
