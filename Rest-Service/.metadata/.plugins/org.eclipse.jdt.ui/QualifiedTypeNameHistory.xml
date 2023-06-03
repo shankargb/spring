@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.spring.xml.Address"/>
+    <fullyQualifiedTypeName name="javax.xml.bind.annotation.XmlRootElement"/>
+    <fullyQualifiedTypeName name="javax.xml.bind.annotation.XmlAccessorType"/>
+    <fullyQualifiedTypeName name="javax.xml.bind.JAXBContext"/>
+    <fullyQualifiedTypeName name="javax.xml.bind.Marshaller"/>
+</qualifiedTypeNameHistroy>
