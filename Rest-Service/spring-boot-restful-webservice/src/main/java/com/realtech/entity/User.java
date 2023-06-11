@@ -29,6 +29,18 @@ public class User {
 	@Column(nullable = false, unique = true)
 	private String email;
 
+	public User() {
+
+	}
+
+	public User(Long id, String firstName, String lastName, String email) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -60,6 +72,5 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
 }

@@ -1,10 +1,13 @@
 package com.realtech.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,13 +15,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.service.annotation.PutExchange;
+import org.springframework.web.context.request.WebRequest;
 
-import com.realtech.entity.User;
+import com.realtech.dto.UserDto;
+import com.realtech.exception.ErrorDetails;
+import com.realtech.exception.ResourceNotFoundException;
 import com.realtech.service.UserService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.val;
 
 @RestController
 @RequestMapping("api/users")
+@Tag(
+		name = "CRUD REST APIs for User Resource",
+		description = "Create User, Update USer, Get User, Get All Users, Delete User"
+		)
 public class UserController {
 
 	@Autowired
@@ -26,41 +41,91 @@ public class UserController {
 
 	// build create User REST API
 	@PostMapping
-	public User createUser(@RequestBody User user) {
-		User savedUser = userService.createUser(user);
-		return user;
+	@Operation(
+			summary = "Create User REST API",
+			description = "Create User REST API is used to save User in database"
+			)
+	@ApiResponse(
+			responseCode = "201",
+			description = "HTTP Status 201 CREATED"
+			)
+	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto user) {
+		UserDto savedUser = userService.createUser(user);
+		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
 	}
 
 	// build get user by id REST API
 	// http://localhost:2343/api/users/1
 	@GetMapping("{id}")
-	public Optional<User> getUserById(@PathVariable("id") Long userId) {
-		Optional<User> user = userService.getUserById(userId);
-		return user;
+	@Operation(
+			summary = "Get User By ID REST API",
+			description = "Get User By ID REST API is used to get Single User from the database"
+			)
+	@ApiResponse(
+			responseCode = "200",
+			description = "HTTP Status 200 SUCCESS"
+			)
+	public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long userId) {
+		UserDto user = userService.getUserById(userId);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 	// build Get All Users REST API
 	// http://localhost:2343/api/users
 	@GetMapping
-	public List<User> getAllUsers() {
-		List<User> users = userService.getAllUsers();
-		return users;
+	@Operation(
+			summary = "Get All Users REST API",
+			description = "Get All Users REST API is used to get all Users from the database"
+			)
+	@ApiResponse(
+			responseCode = "200",
+			description = "HTTP Status 200 SUCCESS"
+			)
+	public ResponseEntity<List<UserDto>> getAllUsers() {
+		List<UserDto> users = userService.getAllUsers();
+		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
 	// build Update User REST API
 	// http://localhost:2343/api/users/1
 	@PutMapping("{id}")
-	public User updateUser(@PathVariable("id") Long userId, @RequestBody User user) {
+	@Operation(
+			summary = "Update User REST API",
+			description = "Update User REST API is used to update a partcular user in the database"
+			)
+	@ApiResponse(
+			responseCode = "200",
+			description = "HTTP Status 200 SUCCESS"
+			)
+	public ResponseEntity<UserDto> updateUser(@Valid @PathVariable("id") Long userId, @RequestBody UserDto user) {
 		user.setId(userId);
-		User updatedUser = userService.updateUser(user);
-		return updatedUser;
+		UserDto updatedUser = userService.updateUser(user);
+		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
 
 	// build Delete USer REST API
 	// http://localhost:2343/api/users/1
 	@DeleteMapping("{id}")
-	public String deleteUser(@PathVariable("id") Long userId) {
+	@Operation(
+			summary = "Delete User REST API",
+			description = "Delete User REST API is used to delete a partcular user from the database"
+			)
+	@ApiResponse(
+			responseCode = "200",
+			description = "HTTP Status 200 SUCCESS"
+			)
+	public ResponseEntity<String> deleteUser(@PathVariable("id") Long userId) {
 		userService.deleteUser(userId);
-		return "User Deleted Successfully";
+		return new ResponseEntity<>("User Deleted Successfully", HttpStatus.OK);
 	}
+	
+	/*
+	 * @ExceptionHandler(value = ResourceNotFoundException.class) public
+	 * ResponseEntity<ErrorDetails>
+	 * handleResourceNotFoundException(ResourceNotFoundException
+	 * exception,WebRequest webRequest){ ErrorDetails errorDetails = new
+	 * ErrorDetails( LocalDateTime.now(), exception.getMessage(),
+	 * webRequest.getDescription(false),"USER_NOT_FOUND" ); return new
+	 * ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND); }
+	 */
 }

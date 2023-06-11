@@ -1,19 +1,18 @@
 package com.realtech.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import com.realtech.entity.User;
+import com.realtech.dto.UserDto;
 
 public interface UserService {
 
-	User createUser(User user);
+	UserDto createUser(UserDto user);
 
-	Optional<User> getUserById(Long id);
+	UserDto getUserById(Long id);
 
-	List<User> getAllUsers();
+	List<UserDto> getAllUsers();
 
-	User updateUser(User user);
+	UserDto updateUser(UserDto user);
 
 	void deleteUser(Long id);
 }
