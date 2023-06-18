@@ -26,4 +26,6 @@ public class Employee {
 
     private String contactNo;
     private String dob;
+    private String departmentCode;
+    private String organizationCode;
 }

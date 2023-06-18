@@ -1,5 +1,6 @@
 package com.realtech.employeeservice.controller;
 
+import com.realtech.employeeservice.dto.ApiResponseDto;
 import com.realtech.employeeservice.dto.EmployeeDto;
 import com.realtech.employeeservice.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class EmployeeController {
     }
 
     @GetMapping("{employeeId}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable Long employeeId) {
-        EmployeeDto employee = employeeService.getEmployeeById(employeeId);
-        return new ResponseEntity<>(employee,HttpStatus.OK);
+    public ResponseEntity<ApiResponseDto> getEmployeeById(@PathVariable Long employeeId) {
+        ApiResponseDto apiResponseDto = employeeService.getEmployeeById(employeeId);
+        return new ResponseEntity<>(apiResponseDto,HttpStatus.OK);
     }
 }
