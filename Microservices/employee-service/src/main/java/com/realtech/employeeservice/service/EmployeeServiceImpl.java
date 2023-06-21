@@ -1,5 +1,6 @@
 package com.realtech.employeeservice.service;
 
+import com.netflix.discovery.converters.Auto;
 import com.realtech.employeeservice.dto.ApiResponseDto;
 import com.realtech.employeeservice.dto.DepartmentDto;
 import com.realtech.employeeservice.dto.EmployeeDto;
@@ -26,6 +27,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private WebClient webClient;
 
+    @Autowired
+    private ApiClient apiClient;
+
    // private RestTemplate restTemplate;
 
    // private ModelMapper modelMapper;
@@ -51,10 +55,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         ResponseEntity<OrganizationDto> responseOrg=restTemplate.getForEntity("http://localhost:8084/api/organizations/"+employee.getOrganizationCode(), OrganizationDto.class);
         OrganizationDto organizationDto = responseOrg.getBody();*/
 
-        DepartmentDto departmentDto=webClient.get().uri("http://localhost:8083/api/departments/"+employee.getDepartmentCode())
+       /* DepartmentDto departmentDto=webClient.get().uri("http://localhost:8083/api/departments/"+employee.getDepartmentCode())
                 .retrieve()
                 .bodyToMono(DepartmentDto.class)
-                .block();
+                .block();*/
+
+        DepartmentDto departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
 
         OrganizationDto organizationDto = webClient.get().uri("http://localhost:8084/api/organizations/"+employee.getOrganizationCode())
                 .retrieve()
